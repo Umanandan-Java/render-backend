@@ -12,11 +12,13 @@ app.config['SECRET_KEY'] = 'your_super_secret_key'  # Replace with a secure key 
 # --- DB Connection ---
 def get_db_connection():
     return mysql.connector.connect(
-        host="localhost",
-        user="root",
-        password="chromePassword12",
-        database="userdb"
+        host=os.getenv("DB_HOST", "hopper.proxy.rlwy.net"),
+        port=int(os.getenv("DB_PORT", 31860)),
+        user=os.getenv("DB_USER", "root"),
+        password=os.getenv("DB_PASSWORD", "GKdnjVtectMPqhifAkiaAzqRQdYCnCty"),
+        database=os.getenv("DB_NAME", "railway")
     )
+
 
 def verify_jwt():
     token = request.cookies.get('token')
